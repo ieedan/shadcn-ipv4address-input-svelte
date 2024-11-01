@@ -1,38 +1,84 @@
 <script lang="ts">
+	import { isNumber } from '.';
+
 	type Props = {
-		value?: number;
+		value?: number | null;
+		goNext?: () => void;
+		goPrevious?: () => void;
+		ref?: HTMLInputElement
 	};
 
-	let { value = $bindable(0) }: Props = $props();
+	let { value = $bindable(null), goPrevious, goNext, ref = $bindable() }: Props = $props();
 
-	const onInput = (e: Event) => {
-		const target = e.target as HTMLInputElement;
+	const onInput = (e: KeyboardEvent) => {
+		// just continue as normal
+		if (e.key == 'Tab' || e.key == 'Delete') return;
 
-		const valStr = target.value.replaceAll(/[^\d]/g, '');
-
-		if (valStr.length == 0) {
-			target.value = '';
+		// for backspace we goPrevious if the value is empty
+		if (e.key == 'Backspace') {
+			if (value == null || value.toString().length == 0) {
+				// after update
+				setTimeout(() => goPrevious?.());
+			}
 			return;
 		}
 
-		value = parseInt(valStr);
+		// we want to go forward for `.` or ` `
+		if (['.', ' '].includes(e.key) && !e.ctrlKey && !e.metaKey) {
+			e.preventDefault();
+			goNext?.();
+			return;
+		}
 
-		if (value > 255) {
-			value = 255;
-		} else if (value < 0) {
-			value = 0;
+		// disallow any non numbers
+		if (!isNumber(e.key)) {
+			e.preventDefault();
+			return;
+		}
+
+		const newValue = (e.target as HTMLInputElement).value + e.key;
+
+		// first check valid
+
+		if (newValue.length > 3) {
+			e.preventDefault();
+			goNext?.();
+			return;
+		}
+
+		const integerValue = parseInt(newValue);
+
+		// we will try to advance if its greater
+		if (integerValue > 255) {
+			e.preventDefault();
+			setTimeout(() => goNext?.());
+			return;
+		}
+
+		// this should be impossible but in any case
+		if (integerValue < 0) {
+			e.preventDefault();
+			return;
+		}
+
+		// check should advance
+		if (newValue.length == 3) {
+			// after update
+			setTimeout(() => goNext?.());
+			return;
 		}
 	};
 </script>
 
 <input
+	bind:this={ref}
 	min={0}
 	max={255}
 	maxlength={3}
 	bind:value
-	oninput={onInput}
+	onkeydown={onInput}
 	type="number"
-	class="hide-ramp h-full w-10 border-0 bg-transparent outline-none focus:outline-none text-center"
+	class="hide-ramp h-full w-9 border-0 bg-transparent text-center outline-none focus:outline-none"
 />
 
 <style lang="postcss">

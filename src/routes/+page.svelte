@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Button } from '$lib/components/ui/button';
-	import { IPv4AddressInput } from '$lib/components/ui/ipv4address-input';
+	import { IPv4AddressInput, type IPv4Address } from '$lib/components/ui/ipv4address-input';
 	import { Separator } from '$lib/components/ui/separator';
 	import ExampleContainer from './example-container.svelte';
 	import { Label } from '$lib/components/ui/label';
@@ -10,7 +10,9 @@
 	import IPv4AddressInputRaw from '$lib/components/ui/ipv4address-input/ipv4address-input.svelte?raw';
 	import IndexRaw from '$lib/components/ui/ipv4address-input/index.ts?raw';
 
-	let value: string | null = $state(null);
+	let value = $state<IPv4Address>([null, null, null, null]);
+	let completed = $state(false)
+	let valueString: string | undefined = $state()
 </script>
 
 <svelte:head>
@@ -23,11 +25,15 @@
 			<section class="flex max-w-[450px] flex-col place-items-center justify-center gap-5">
 				<h1 class="text-center text-4xl font-bold">Shadcn IPv4Address Input Svelte</h1>
 				<p class="text-center text-muted-foreground">
-					An implementation of a IPv4Address Input component built on top of Shadcn UI's input-otp component.
+					An implementation of a IPv4Address Input component built on top of Shadcn UI's input-otp
+					component.
 				</p>
 				<div class="flex place-items-center gap-2">
 					<Button href="#try-it-out">Try it out</Button>
-					<Button variant="secondary" href={'https://github.com/ieedan/shadcn-ipv4address-input-svelte'}>
+					<Button
+						variant="secondary"
+						href={'https://github.com/ieedan/shadcn-ipv4address-input-svelte'}
+					>
 						GitHub
 					</Button>
 				</div>
@@ -35,8 +41,18 @@
 			<ExampleContainer id="try-it-out" class="min-h-[350px]">
 				<div class="flex w-full flex-col place-items-center justify-center gap-5">
 					<div class="flex flex-col gap-2">
-						<Label>IPv4Address</Label>
-						<IPv4AddressInput />
+						<Label>IP Address</Label>
+						<IPv4AddressInput bind:value bind:valueString bind:completed />
+					</div>
+					<div>
+						<ul>
+							<li>
+								Valid: {completed}
+							</li>
+							<li>
+								Value: {valueString}
+							</li>
+						</ul>
 					</div>
 					<div class="flex w-full max-w-[300px] flex-col justify-start gap-5">
 						<Button type="submit" class="w-fit">Submit</Button>
