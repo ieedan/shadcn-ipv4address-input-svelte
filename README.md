@@ -1,38 +1,41 @@
-# sv
+![preview]()
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+# shadcn-ipv4address-input-svelte
 
-## Creating a project
+A beautiful ipv4address input built with all the behaviors you expect.
 
-If you're seeing this, you've probably already done this step. Congrats!
+## Setup
 
-```bash
-# create a new project in the current directory
-npx sv create
+### Install shadcn-svelte via CLI
 
-# create a new project in my-app
-npx sv create my-app
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+Run the `shadcn-svelte` init command to setup your project:
 
 ```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+npx shadcn-svelte@next init
 ```
 
-## Building
+### Install necessary components
 
-To create a production version of your app:
+Run the `shadcn-svelte` add command to add the necessary components to your project:
 
 ```bash
-npm run build
+npx shadcn-svelte@next init
 ```
 
-You can preview the production build with `npm run preview`.
+### Copy the code
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+You can find the most recent code [here](https://github.com/ieedan/shadcn-ipv4address-input-svelte/tree/main/src/lib/components/ui/ipv4address-input).
+
+## Contributing
+
+Contributions as always are welcomed.
+
+### Changelog
+
+When contributing you'll want to add any changes you make to the changelog you can do this by running:
+
+```bash
+npx changy add
+# or
+npm run changelog:new
+```
