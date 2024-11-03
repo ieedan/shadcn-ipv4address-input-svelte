@@ -116,35 +116,6 @@
 					</Snippet.Root>
 				</div>
 				<div class="flex flex-col gap-2">
-					<h3 class="w-full text-start text-lg font-semibold">Install necessary components</h3>
-					<p>
-						Run the <code class="rounded-md bg-accent px-1 py-[2px]">shadcn-svelte</code> add command
-						to add the necessary components to your project:
-					</p>
-					<Snippet.Root code={`npx shadcn-svelte@next add pin-input`}>
-						<Snippet.CopyButton
-							code={[
-								{
-									name: 'npm',
-									code: 'npx shadcn-svelte@next add pin-input'
-								},
-								{
-									name: 'pnpm',
-									code: 'pnpm dlx shadcn-svelte@next add pin-input'
-								},
-								{
-									name: 'bun',
-									code: 'bunx shadcn-svelte@next add pin-input'
-								},
-								{
-									name: 'yarn',
-									code: 'yarn shadcn-svelte@next add pin-input'
-								}
-							]}
-						/>
-					</Snippet.Root>
-				</div>
-				<div class="flex flex-col gap-2">
 					<h3 class="w-full text-start text-lg font-semibold">Copy the code</h3>
 					<p>
 						You can find the code <Link
