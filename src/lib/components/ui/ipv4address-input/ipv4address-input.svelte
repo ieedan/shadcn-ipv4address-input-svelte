@@ -1,27 +1,24 @@
 <script lang="ts">
+	import { cn } from '$lib/utils';
+	import { safeParseIPv4Address } from '.';
 	import Input from './ipv4address-input-input.svelte';
 
 	type Props = {
 		separator?: string;
+		/** An IP Address placeholder `0.0.0.0` or `0_0_0_0` or `0 0 0 0` */
+		placeholder?: string;
 		value?: [number | null, number | null, number | null, number | null];
-		valueString?: string;
-		completed?: boolean;
+		class?: string;
 	};
 
 	let {
 		separator = '.',
-		value = $bindable([0, 0, 0, 0]),
-		valueString = $bindable(),
-		completed = $bindable(false)
+		value = $bindable([null, null, null, null]),
+		placeholder,
+		class: className
 	}: Props = $props();
 
-	$effect(() => {
-		valueString = `${value[0] ?? 0}.${value[1] ?? 0}.${value[2] ?? 0}.${value[3] ?? 0}`;
-	});
-
-	$effect(() => {
-		completed = !value.includes(null);
-	});
+	let parsedPlaceholder = safeParseIPv4Address(placeholder);
 
 	let firstInput = $state<HTMLInputElement>();
 	let secondInput = $state<HTMLInputElement>();
@@ -29,14 +26,25 @@
 	let fourthInput = $state<HTMLInputElement>();
 </script>
 
-<div class="flex h-10 place-items-center rounded-md border border-border px-3 font-serif">
-	<Input bind:ref={firstInput} goNext={() => secondInput?.focus()} bind:value={value[0]} />
+<div
+	class={cn(
+		'flex h-10 place-items-center rounded-md border border-border px-3 font-serif',
+		className
+	)}
+>
+	<Input
+		bind:ref={firstInput}
+		goNext={() => secondInput?.focus()}
+		bind:value={value[0]}
+		placeholder={parsedPlaceholder ? parsedPlaceholder[0] : undefined}
+	/>
 	<span class="font-serif">{separator}</span>
 	<Input
 		bind:ref={secondInput}
 		goNext={() => thirdInput?.focus()}
 		goPrevious={() => firstInput?.focus()}
 		bind:value={value[1]}
+		placeholder={parsedPlaceholder ? parsedPlaceholder[1] : undefined}
 	/>
 	<span class="font-serif">{separator}</span>
 	<Input
@@ -44,7 +52,13 @@
 		goNext={() => fourthInput?.focus()}
 		goPrevious={() => secondInput?.focus()}
 		bind:value={value[2]}
+		placeholder={parsedPlaceholder ? parsedPlaceholder[2] : undefined}
 	/>
 	<span class="font-serif">{separator}</span>
-	<Input bind:ref={fourthInput} goPrevious={() => thirdInput?.focus()} bind:value={value[3]} />
+	<Input
+		bind:ref={fourthInput}
+		goPrevious={() => thirdInput?.focus()}
+		bind:value={value[3]}
+		placeholder={parsedPlaceholder ? parsedPlaceholder[3] : undefined}
+	/>
 </div>

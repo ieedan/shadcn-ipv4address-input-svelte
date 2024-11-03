@@ -1,14 +1,21 @@
 <script lang="ts">
 	import { isNumber } from '.';
+	import type { HTMLAttributes } from 'svelte/elements';
 
 	type Props = {
-		value?: string | null;
+		value?: number | null;
 		goNext?: () => void;
 		goPrevious?: () => void;
 		ref?: HTMLInputElement;
 	};
 
-	let { value = $bindable(null), goPrevious, goNext, ref = $bindable() }: Props = $props();
+	let {
+		value = $bindable(null),
+		goPrevious,
+		goNext,
+		ref = $bindable(),
+		...rest
+	}: Props & HTMLAttributes<HTMLInputElement> = $props();
 
 	const onInput = (e: KeyboardEvent) => {
 		if (e.ctrlKey || e.metaKey) return;
@@ -53,7 +60,7 @@
 		}
 
 		// disallow any non numbers
-		// By default this prevents any undefined behavior 
+		// By default this prevents any undefined behavior
 		// so make sure anything that can happen is defined.
 		if (!isNumber(e.key)) {
 			e.preventDefault();
@@ -101,8 +108,9 @@
 	maxlength={3}
 	bind:value
 	onkeydown={onInput}
-	type="string"
-	class="hide-ramp h-full w-9 border-0 bg-transparent text-center outline-none focus:outline-none"
+	type="text"
+	class="hide-ramp h-full w-9 border-0 bg-transparent text-center outline-none placeholder:text-muted-foreground focus:outline-none"
+	{...rest}
 />
 
 <style lang="postcss">

@@ -7,7 +7,7 @@
 	import Button from '../button/button.svelte';
 
 	const style = tv({
-		base: 'absolute right-5 top-[11px] size-8 flex place-items-center justify-center rounded-md text-foreground/75 transition-colors hover:bg-border',
+		base: 'absolute right-5 top-[11px] size-8 flex place-items-center justify-center rounded-md text-foreground/75 transition-colors hover:bg-border'
 	});
 
 	type SnippetOption = {
@@ -20,8 +20,7 @@
 		code?: string | undefined | SnippetOption[];
 	}
 
-	let { class: className = undefined, code = $bindable(undefined) }: Props =
-		$props();
+	let { class: className = undefined, code = $bindable(undefined) }: Props = $props();
 
 	const context = rootContext.get();
 
@@ -45,24 +44,14 @@
 </script>
 
 {#if typeof code == 'string'}
-	<Button
-		onclick={() => copy(code)}
-		variant="ghost"
-		size="icon"
-		class={cn(style(), className)}
-	>
+	<Button onclick={() => copy(code)} variant="ghost" size="icon" class={cn(style(), className)}>
 		<CopyIcon {copied} />
 	</Button>
 {:else if code != undefined}
 	<DropdownMenu.Root>
 		<DropdownMenu.Trigger>
 			{#snippet child({ props })}
-				<Button
-					variant="ghost"
-					size="icon"
-					class={cn(style(), className)}
-					{...props}
-				>
+				<Button variant="ghost" size="icon" class={cn(style(), className)} {...props}>
 					<CopyIcon {copied} />
 				</Button>
 			{/snippet}

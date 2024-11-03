@@ -11,12 +11,7 @@
 		children?: Snippet;
 	}
 
-	let {
-		class: className = undefined,
-		code,
-		showCopy = true,
-		children,
-	}: Props = $props();
+	let { class: className = undefined, code, showCopy = true, children }: Props = $props();
 
 	rootContext.init({ code });
 </script>
