@@ -17,7 +17,7 @@
 		...rest
 	}: Props & HTMLAttributes<HTMLInputElement> = $props();
 
-	const onInput = (e: KeyboardEvent) => {
+	const onKeydown = (e: KeyboardEvent) => {
 		if (e.ctrlKey || e.metaKey) return;
 
 		// just continue as normal
@@ -91,11 +91,14 @@
 			e.preventDefault();
 			return;
 		}
+	};
 
+	const onInput = () => {
 		// check should advance
-		if (newValue.length == 3) {
-			// after update
-			setTimeout(() => goNext?.());
+		// we do this here because firefox/safari and chrome behave differently with the `setTimeout` function.
+		// this ensures the value still enters if valid and we navigate after
+		if (value && value.toString().length == 3) {
+			goNext?.();
 			return;
 		}
 	};
@@ -107,7 +110,8 @@
 	max={255}
 	maxlength={3}
 	bind:value
-	onkeydown={onInput}
+	oninput={onInput}
+	onkeydown={onKeydown}
 	type="text"
 	class="hide-ramp h-full w-9 border-0 bg-transparent text-center outline-none placeholder:text-muted-foreground focus:outline-none"
 	{...rest}
