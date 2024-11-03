@@ -24,6 +24,34 @@
 	let secondInput = $state<HTMLInputElement>();
 	let thirdInput = $state<HTMLInputElement>();
 	let fourthInput = $state<HTMLInputElement>();
+
+	const paste = (e: ClipboardEvent) => {
+		const data = e.clipboardData?.getData('text');
+
+		if (!data) return;
+
+		const parsed = safeParseIPv4Address(data);
+
+		// TODO: Add validation here
+
+		if (!parsed) return;
+
+		if (parsed[0] != null) {
+			value[0] = parseInt(parsed[0])
+		}
+
+		if (parsed[1] != null) {
+			value[1] = parseInt(parsed[1])
+		}
+
+		if (parsed[2] != null) {
+			value[2] = parseInt(parsed[2])
+		}
+
+		if (parsed[3] != null) {
+			value[3] = parseInt(parsed[3])
+		}
+	};
 </script>
 
 <div
@@ -37,6 +65,7 @@
 		goNext={() => secondInput?.focus()}
 		bind:value={value[0]}
 		placeholder={parsedPlaceholder ? parsedPlaceholder[0] : undefined}
+		onpaste={paste}
 	/>
 	<span class="font-serif">{separator}</span>
 	<Input
@@ -45,6 +74,7 @@
 		goPrevious={() => firstInput?.focus()}
 		bind:value={value[1]}
 		placeholder={parsedPlaceholder ? parsedPlaceholder[1] : undefined}
+		onpaste={paste}
 	/>
 	<span class="font-serif">{separator}</span>
 	<Input
@@ -53,6 +83,7 @@
 		goPrevious={() => secondInput?.focus()}
 		bind:value={value[2]}
 		placeholder={parsedPlaceholder ? parsedPlaceholder[2] : undefined}
+		onpaste={paste}
 	/>
 	<span class="font-serif">{separator}</span>
 	<Input
@@ -60,5 +91,6 @@
 		goPrevious={() => thirdInput?.focus()}
 		bind:value={value[3]}
 		placeholder={parsedPlaceholder ? parsedPlaceholder[3] : undefined}
+		onpaste={paste}
 	/>
 </div>

@@ -20,17 +20,17 @@ export const isNumber = (num: unknown): boolean => {
  */
 export const safeParseIPv4Address = (
 	ipv4Address: string | undefined
-): [string, string, string, string] | undefined => {
+): [string | null, string | null, string | null, string | null] | undefined => {
 	if (ipv4Address === undefined) return undefined;
 	let ip = ipv4Address.trim();
 
 	ip = ip.replaceAll('_', '.');
 	ip = ip.replaceAll(' ', '.');
 
-	const segments = ip.split('.');
+	const segments: (string | null)[] = ip.split('.');
 
 	while (segments.length < 4) {
-		segments.push('0');
+		segments.push(null);
 	}
 
 	// @ts-expect-error We know this is 4 we just made sure
