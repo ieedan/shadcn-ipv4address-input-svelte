@@ -2,7 +2,7 @@
 	import { z } from 'zod';
 
 	export const formSchema = z.object({
-		ipAddress: z.string().min(7).max(15)
+		ip: z.string().min(7).max(15)
 	});
 	export type FormSchema = typeof formSchema;
 </script>
@@ -39,7 +39,7 @@
 	});
 
 	$effect(() => {
-		$formData.ipAddress = `${formValue[0]}.${formValue[1]}.${formValue[2]}.${formValue[3]}`;
+		$formData.ip = `${formValue[0]}.${formValue[1]}.${formValue[2]}.${formValue[3]}`;
 	});
 
 	message.subscribe((message) => {
@@ -78,14 +78,14 @@
 				<form
 					method="POST"
 					use:enhance
-					class="flex w-full flex-col place-items-center justify-center gap-5"
+					class="flex w-full flex-col place-items-center justify-center gap-5 p-4"
 				>
 					<div class="flex flex-col gap-2">
 						<Label>IP Address</Label>
 						<IPv4AddressInput bind:value={formValue} />
-						<input type="text" bind:value={$formData.ipAddress} name="ipAddress" class="hidden" />
+						<input type="text" bind:value={$formData.ip} name="ip" class="hidden" />
 					</div>
-					<div class="flex w-full max-w-[350px] flex-col justify-start gap-5">
+					<div class="flex w-full max-w-[300px] flex-col justify-start gap-5">
 						{#if browser}
 							<SuperDebug data={$formData} />
 						{/if}
