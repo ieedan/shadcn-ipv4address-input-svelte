@@ -69,8 +69,6 @@
 
 		const newValue = (e.target as HTMLInputElement).value + e.key;
 
-		// first check valid
-
 		if (newValue.length > 3) {
 			e.preventDefault();
 			goNext?.();
