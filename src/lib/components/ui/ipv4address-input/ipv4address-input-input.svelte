@@ -17,6 +17,9 @@
 		...rest
 	}: Props & HTMLAttributes<HTMLInputElement> = $props();
 
+	/** Runs after input (this is here because safari/firefox treat the `setTimeout` function differently than chrome) */
+	let after: (() => void) | undefined = undefined;
+
 	const onKeydown = (e: KeyboardEvent) => {
 		if (e.ctrlKey || e.metaKey) return;
 
@@ -26,8 +29,8 @@
 		// for backspace we goPrevious if the value is empty
 		if (e.key == 'Backspace') {
 			if (value == null || value.toString().length == 0) {
-				// after update
-				setTimeout(() => goPrevious?.());
+				// the 2 ensures consistent behavior in all browsers
+				setTimeout(() => goPrevious?.(), 2);
 			}
 			return;
 		}
@@ -80,7 +83,7 @@
 		// we will try to advance if its greater
 		if (integerValue > 255) {
 			e.preventDefault();
-			setTimeout(() => goNext?.());
+			goNext?.();
 			return;
 		}
 
@@ -89,16 +92,17 @@
 			e.preventDefault();
 			return;
 		}
+
+		if (newValue.length == 3) {
+			// go next after input
+			after = () => goNext?.();
+			return;
+		}
 	};
 
 	const onInput = () => {
-		// check should advance
-		// we do this here because firefox/safari and chrome behave differently with the `setTimeout` function.
-		// this ensures the value still enters if valid and we navigate after
-		if (value && value.toString().length == 3) {
-			goNext?.();
-			return;
-		}
+		after?.();
+		after = undefined;
 	};
 </script>
 

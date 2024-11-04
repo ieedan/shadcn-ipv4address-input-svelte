@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { cn } from '$lib/utils';
-	import { safeParseIPv4Address } from '.';
+	import { isNumber, safeParseIPv4Address } from '.';
 	import Input from './ipv4address-input-input.svelte';
 
 	type Props = {
@@ -32,25 +32,25 @@
 
 		const parsed = safeParseIPv4Address(data);
 
-		// TODO: Add validation here
-
 		if (!parsed) return;
 
-		if (parsed[0] != null) {
-			value[0] = parseInt(parsed[0])
-		}
+		// validates each octet if invalid then sets to null
+		value[0] = validate(parsed[0]);
+		value[1] = validate(parsed[1]);
+		value[2] = validate(parsed[2]);
+		value[3] = validate(parsed[3]);
+	};
 
-		if (parsed[1] != null) {
-			value[1] = parseInt(parsed[1])
-		}
+	const validate = (octet: string | null): number | null => {
+		if (octet == null) return null;
 
-		if (parsed[2] != null) {
-			value[2] = parseInt(parsed[2])
-		}
+		if (!isNumber(octet)) return null;
 
-		if (parsed[3] != null) {
-			value[3] = parseInt(parsed[3])
-		}
+		const val = parseInt(octet);
+
+		if (val < 0 || val > 255) return null;
+
+		return val;
 	};
 </script>
 
