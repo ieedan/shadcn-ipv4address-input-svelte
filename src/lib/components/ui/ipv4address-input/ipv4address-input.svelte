@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { cn } from '$lib/utils';
-	import { safeParseIPv4Address } from '.';
+	import { isNumber, safeParseIPv4Address } from '.';
 	import Input from './ipv4address-input-input.svelte';
 
 	type Props = {
@@ -24,6 +24,34 @@
 	let secondInput = $state<HTMLInputElement>();
 	let thirdInput = $state<HTMLInputElement>();
 	let fourthInput = $state<HTMLInputElement>();
+
+	const paste = (e: ClipboardEvent) => {
+		const data = e.clipboardData?.getData('text');
+
+		if (!data) return;
+
+		const parsed = safeParseIPv4Address(data);
+
+		if (!parsed) return;
+
+		// validates each octet if invalid then sets to null
+		value[0] = validate(parsed[0]);
+		value[1] = validate(parsed[1]);
+		value[2] = validate(parsed[2]);
+		value[3] = validate(parsed[3]);
+	};
+
+	const validate = (octet: string | null): number | null => {
+		if (octet == null) return null;
+
+		if (!isNumber(octet)) return null;
+
+		const val = parseInt(octet);
+
+		if (val < 0 || val > 255) return null;
+
+		return val;
+	};
 </script>
 
 <div
@@ -37,6 +65,7 @@
 		goNext={() => secondInput?.focus()}
 		bind:value={value[0]}
 		placeholder={parsedPlaceholder ? parsedPlaceholder[0] : undefined}
+		onpaste={paste}
 	/>
 	<span class="font-serif">{separator}</span>
 	<Input
@@ -45,6 +74,7 @@
 		goPrevious={() => firstInput?.focus()}
 		bind:value={value[1]}
 		placeholder={parsedPlaceholder ? parsedPlaceholder[1] : undefined}
+		onpaste={paste}
 	/>
 	<span class="font-serif">{separator}</span>
 	<Input
@@ -53,6 +83,7 @@
 		goPrevious={() => secondInput?.focus()}
 		bind:value={value[2]}
 		placeholder={parsedPlaceholder ? parsedPlaceholder[2] : undefined}
+		onpaste={paste}
 	/>
 	<span class="font-serif">{separator}</span>
 	<Input
@@ -60,5 +91,6 @@
 		goPrevious={() => thirdInput?.focus()}
 		bind:value={value[3]}
 		placeholder={parsedPlaceholder ? parsedPlaceholder[3] : undefined}
+		onpaste={paste}
 	/>
 </div>
