@@ -1,0 +1,22 @@
+[
+	{
+		"name": "ui",
+		"blocks": [
+			{
+				"name": "ipv4address-input",
+				"directory": "src/lib/components/ui/ipv4address-input",
+				"category": "ui",
+				"tests": false,
+				"subdirectory": true,
+				"files": [
+					"index.ts",
+					"ipv4address-input-input.svelte",
+					"ipv4address-input.svelte"
+				],
+				"localDependencies": [],
+				"dependencies": [],
+				"devDependencies": []
+			}
+		]
+	}
+]
