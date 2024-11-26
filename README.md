@@ -1,3 +1,5 @@
+[![jsrepo](https://jsrepo.dev/badges/build/passing.svg)](https://jsrepo.dev)
+
 ![image](https://github.com/user-attachments/assets/20d3053a-1fb1-47a0-8b8e-521e2d12d118)
 
 # shadcn-ipv4address-input-svelte
@@ -14,13 +16,15 @@ Run the `shadcn-svelte` init command to setup your project:
 npx shadcn-svelte@next init
 ```
 
-### Install necessary components
-
-Run the `shadcn-svelte` add command to add the necessary components to your project:
+## Automatic
 
 ```bash
-npx shadcn-svelte@next init
+npx jsrepo add github/ieedan/shadcn-ipv4address-input-svelte/ui/ipv4address-input
 ```
+
+or
+
+## Manual
 
 ### Copy the code
 
