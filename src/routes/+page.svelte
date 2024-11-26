@@ -61,7 +61,7 @@
 			<section class="flex max-w-[450px] flex-col place-items-center justify-center gap-5">
 				<h1 class="text-center text-4xl font-bold">Shadcn IPv4Address Input Svelte</h1>
 				<p class="text-center text-muted-foreground">
-					An implementation of a IPv4Address Input component built with all the wonderful keyboard
+					An implementation of an IPv4Address Input component built with all the wonderful keyboard
 					behaviors you would expect.
 				</p>
 				<div class="flex place-items-center gap-2">
@@ -114,6 +114,39 @@
 							]}
 						/>
 					</Snippet.Root>
+				</div>
+				<div class="flex flex-col gap-2">
+					<div>
+						<h2 class="w-full py-2 text-start text-2xl font-semibold">Add Component</h2>
+						<Separator />
+					</div>
+					<h3 class="w-full text-start text-lg font-semibold">Automatic</h3>
+					<Snippet.Root
+						code={'npx jsrepo add github/ieedan/shadcn-ipv4address-input-svelte/ui/ipv4address-input'}
+					>
+						<Snippet.CopyButton
+							code={[
+								{
+									name: 'npm',
+									code: 'npx jsrepo add github/ieedan/shadcn-ipv4address-input-svelte/ui/ipv4address-input'
+								},
+								{
+									name: 'pnpm',
+									code: 'pnpm dlx jsrepo add github/ieedan/shadcn-ipv4address-input-svelte/ui/ipv4address-input'
+								},
+								{
+									name: 'bun',
+									code: 'bun x jsrepo add github/ieedan/shadcn-ipv4address-input-svelte/ui/ipv4address-input'
+								},
+								{
+									name: 'yarn',
+									code: 'npx jsrepo add github/ieedan/shadcn-ipv4address-input-svelte/ui/ipv4address-input'
+								}
+							]}
+						/>
+					</Snippet.Root>
+					<p>or</p>
+					<h3 class="w-full text-start text-lg font-semibold">Manual</h3>
 				</div>
 				<div class="flex flex-col gap-2">
 					<h3 class="w-full text-start text-lg font-semibold">Copy the code</h3>
