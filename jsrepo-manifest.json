@@ -13,9 +13,36 @@
 					"ipv4address-input-input.svelte",
 					"ipv4address-input.svelte"
 				],
-				"localDependencies": [],
+				"localDependencies": [
+					"lib/utils"
+				],
 				"dependencies": [],
-				"devDependencies": []
+				"devDependencies": [],
+				"_imports_": {
+					"$lib/utils": "{{lib/utils}}"
+				}
+			}
+		]
+	},
+	{
+		"name": "lib",
+		"blocks": [
+			{
+				"name": "utils",
+				"directory": "src/lib",
+				"category": "lib",
+				"tests": false,
+				"subdirectory": false,
+				"files": [
+					"utils.ts"
+				],
+				"localDependencies": [],
+				"_imports_": {},
+				"dependencies": [],
+				"devDependencies": [
+					"clsx@^2.1.1",
+					"tailwind-merge@^2.5.4"
+				]
 			}
 		]
 	}
