@@ -8,14 +8,9 @@
 				"category": "ui",
 				"tests": false,
 				"subdirectory": true,
-				"files": [
-					"index.ts",
-					"ipv4address-input-input.svelte",
-					"ipv4address-input.svelte"
-				],
-				"localDependencies": [
-					"lib/utils"
-				],
+				"list": true,
+				"files": ["index.ts", "ipv4address-input-input.svelte", "ipv4address-input.svelte"],
+				"localDependencies": ["lib/utils"],
 				"dependencies": [],
 				"devDependencies": [],
 				"_imports_": {
@@ -33,16 +28,12 @@
 				"category": "lib",
 				"tests": false,
 				"subdirectory": false,
-				"files": [
-					"utils.ts"
-				],
+				"list": false,
+				"files": ["utils.ts"],
 				"localDependencies": [],
 				"_imports_": {},
 				"dependencies": [],
-				"devDependencies": [
-					"clsx@^2.1.1",
-					"tailwind-merge@^2.5.4"
-				]
+				"devDependencies": ["clsx@^2.1.1", "tailwind-merge@^2.5.4"]
 			}
 		]
 	}

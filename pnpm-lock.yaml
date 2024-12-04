@@ -58,8 +58,8 @@ importers:
         specifier: ^15.0.0
         version: 15.11.0
       jsrepo:
-        specifier: ^1.15.1
-        version: 1.15.1(typescript@5.6.3)
+        specifier: ^1.16.1
+        version: 1.16.1(typescript@5.6.3)
       lucide-svelte:
         specifier: ^0.454.0
         version: 0.454.0(svelte@5.1.9)
@@ -1409,8 +1409,8 @@ packages:
   json-stable-stringify-without-jsonify@1.0.1:
     resolution: {integrity: sha512-Bdboy+l7tA3OGW6FjyFHWkP5LuByj1Tk33Ljyq0axyzdk9//JSi2u3fP1QSmd1KNwq6VOKYGlAu87CisVir6Pw==}
 
-  jsrepo@1.15.1:
-    resolution: {integrity: sha512-sIgw/5NcjGD711f9pu3mlbv3QMbk9iZj3co9aYWxWcorod6SCOd9LvsrfjD5XjnCwMuCW6S7+Uv2LyB2i1a2Jw==}
+  jsrepo@1.16.1:
+    resolution: {integrity: sha512-eINq7bql/GHhylKpmiXMeWxjf1FNUbeaCdrb64/G9Q9/EejOMDIwu6QqPZ6cHVhBOK0Cwh0B5w/adoh5Ar0KNg==}
     hasBin: true
 
   just-clone@6.2.0:
@@ -3557,7 +3557,7 @@ snapshots:
 
   json-stable-stringify-without-jsonify@1.0.1: {}
 
-  jsrepo@1.15.1(typescript@5.6.3):
+  jsrepo@1.16.1(typescript@5.6.3):
     dependencies:
       '@biomejs/js-api': 0.7.1(@biomejs/wasm-nodejs@1.9.4)
       '@biomejs/wasm-nodejs': 1.9.4

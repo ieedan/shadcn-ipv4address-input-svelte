@@ -1,0 +1,11 @@
+{
+	"$schema": "https://unpkg.com/jsrepo@1.16.0/schemas/project-config.json",
+	"dirs": ["./src/lib/components", "./src"],
+	"doNotListBlocks": [],
+	"doNotListCategories": ["lib"],
+	"excludeDeps": [],
+	"includeBlocks": ["ipv4address-input", "utils"],
+	"includeCategories": ["ui", "lib"],
+	"errorOnWarn": false,
+	"output": true
+}
